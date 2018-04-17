@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: main-header('All posts')">
+    <meta charset="UTF-8" />
+    <title>Home</title>
+</head>
+<body>
+
+<div th:each="post : ${posts}">
+    <h1 th:text="${post.title}"></h1>
+    <p th:text="${post.body}"></p>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
