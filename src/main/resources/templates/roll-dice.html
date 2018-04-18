@@ -3,28 +3,29 @@
 <head th:replace="fragments/header :: main-header('Roll Dice')"></head>
 <body>
 <div th:replace="fragments/navbar :: mainNavbar"></div>
-<div class="conrainer">
+<div class="container">
     <div class="row">
-        <div class="colcol-lg-12">
-            <div th:if="${guess != null}"></div>
-                <h1 th:text="${'Guess ' + guess}"></h1>
-                <h1 th:text="${'Random ' + rnd}"></h1>
-                <h1 th:if="${win}">You Win!</h1>
-                <h1 th:if="${!win}">You Lose!</h1>
+        <div class="col col-lg-12">
+            <div th:if="${guess != null}">
+                <h1 th:text="${'Guess: ' + guess}"></h1>
+                <h1 th:text="${'Random: ' + rnd}"></h1>
+
+                <h1 th:if="${win}">You Won!</h1>
+                <h1 th:if="${!win}">You Lost!</h1>
+            </div>
+
             <!-- Using #numbers : utility methods for number objects:-->
             <div th:each="number : ${#numbers.sequence(1,6)}">
-                <a class="btnbtn-primary" th: href="/roll-dice/' + ${number}}" th:text="${number}"></a>
+                <a class="btn btn-primary" th:href="@{'/roll-dice/' + ${number}}" th:text="${number}"></a>
             </div>
+
         </div>
     </div>
 </div>
 <footer th:include="fragments/footer :: footer"></footer>
-<footer th:replace="fragments/scripts :: scriptsr"></footer>
-
+<div th:replace="fragments/scripts :: scripts"></div>
 </body>
 </html>
-
-
 
 
 

@@ -1,8 +1,17 @@
-package com.example.blog;
+package com.example.blog.models;
 
 public class Post {
-    String title;
-    String body;
+
+    private String title;
+    private String body;
+
+    public Post() {
+    }
+
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
 
     public String getTitle() {
         return title;

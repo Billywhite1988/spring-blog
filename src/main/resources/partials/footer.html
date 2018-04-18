@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Home</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head>
 <body>
 
-<h1>Welcome to Roll Dice, <span th:text="${name}"></span>!</h1>
-
+<footer th:fragment="footer" class="footer">
+    <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+    </div>
+    <!--Test js file-->
+    <script src="/js/main.js"></script>
+</footer>
 </body>
 </html>

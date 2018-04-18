@@ -1,7 +1,7 @@
 package com.example.blog.controllers;
 
 
-import com.example.blog.models.Post;
+import com.example.blog.services.AdService;
 import com.example.blog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,40 +10,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
-public class PostController {
+public class AdsController {
 
-    PostService postSvc;
+    AdService adSvc;
 
-    public PostController(PostService postSvc) {
-        this.postSvc = postSvc;
+    public AdsController(AdService adSvc) {
+        this.adSvc = adSvc;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/ads")
     public String index(Model model) {
-        model.addAttribute("posts", postSvc.getAllPosts());
-        return "/posts/index";
+        model.addAttribute("ads", adSvc.getAllAds());
+        return "/ads/index";
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/ads/{id}")
     public String show(@PathVariable long id, Model model) {
-        model.addAttribute("post", postSvc.getPost(id));
-        return "/posts/show";
+        model.addAttribute("ad", adSvc.getAd(id));
+        return "/ads/show";
     }
 
-    @GetMapping("/posts/create")
+    @GetMapping("/ads/create")
     @ResponseBody
     public String create() {
-        return "Here is the post create form...";
+        return "Here is the ads create form...";
     }
 
-    @PostMapping("/posts/create")
+    @PostMapping("/ads/create")
     @ResponseBody
     public String insert() {
-        return "Inserted new post!";
+        return "Inserted new ads!";
     }
 
 }
