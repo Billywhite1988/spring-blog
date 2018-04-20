@@ -2,33 +2,40 @@ package com.example.blog.services;
 
 
 import com.example.blog.models.Post;
+import com.example.blog.repositories.PostDao;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service  // Spring Bean
 public class PostService {
+    private PostDao postDao;
 
-    private List<Post> posts;
-
-    public PostService() {
-        this.posts = new ArrayList<>();
-        createPosts();
+    public PostService(PostDao postDao) {
+        this.postDao = postDao;
     }
 
-    public List<Post> getAllPosts() {
-        return posts;
+    // note that we don't need separate insert and update methods.
+    // the save method is smart enough to figure out which it needs to do
+    // i.e. if the passed object already has an `id` property, update an
+    // existing record, if it does not, insert a new record
+    public void save(Post post) {
+        postDao.save(post);
     }
 
-    public Post getPost(long id) {
-        return posts.get(((int) id) - 1);
+    // we'll need to define the return type as `Iterable` as that is
+    // what the CrudRepository defines. You can think of `Iterable` as
+    // an even more generic list, it is still a collection of items
+    public Iterable<Post> findAll() {
+        return postDao.findAll();
     }
 
-    public void createPosts() {
-        posts.add(new Post("Test Title 1", "This is a test post description 1."));
-        posts.add(new Post("Test Title 2", "This is a test post description 2."));
-        posts.add(new Post("Test Title 3", "This is a test post description 3."));
-        posts.add(new Post("Test Title 4", "This is a test post description 4."));
+    public Post findOne(long id) {
+        return postDao.findOne(id);
+    }
+
+    public void delete(long id) {
+        postDao.delete(id);
     }
 }

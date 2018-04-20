@@ -5,26 +5,21 @@
 
 <div th:replace="partials/navbar :: navbar"></div>
 
+<div class="container">
 
-<div>
-    <main class="container">
-
-        <form th:action="@{/ads/create}" th:method="post" th:object="${newAd}">
-            Title:
-            <input th:field="*{title}" />
-            <br />
-            Description:
-            <input th:field="*{description}" />
-            <br />
-            <input type="submit" />
-        </form>
-
-    </main>
-
-    <div th:replace="partials/footer :: footer"></div>
+    <form th:action="@{/ads/create}" th:method="post" th:object="${newAd}">
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Description:
+        <input th:field="*{description}" />
+        <br />
+        <input type="submit" />
+    </form>
 
 </div>
 
+<div th:replace="partials/footer :: footer"></div>
 
 </body>
 </html>

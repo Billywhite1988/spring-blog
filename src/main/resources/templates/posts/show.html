@@ -10,12 +10,12 @@
 
     <h3><span th:text="${post.title}"></span></h3>
     <p><span th:text="${post.body}"></span></p>
+    <p><span th:text="${post.user.email}"></span></p>
 </main>
 
 <div th:replace="partials/footer :: footer"></div>
 </body>
 </html>
-
 
 
 
