@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header  :: main-header(${post.title})">
-    <meta charset="UTF-8" />
-    <title>Home</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials/header :: header('Post Show Page')"></head>
 <body>
 
-<h1 th:text="${post.title}"></h1>
-<p th:text="${post.body}"></p>
-<p th:text="${post.user.email}"></p>
+<div th:replace="partials/navbar :: navbar"></div>
 
+<main class="container">
+    <h1>Post</h1>
+
+    <h3><span th:text="${post.title}"></span></h3>
+    <p><span th:text="${post.body}"></span></p>
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
 </body>
 </html>
-
-
-
-
 
 
 

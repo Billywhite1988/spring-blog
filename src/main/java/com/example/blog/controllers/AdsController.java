@@ -1,46 +1,58 @@
 package com.example.blog.controllers;
 
-
+import com.example.blog.models.Ad;
+import com.example.blog.repositories.AdRepository;
 import com.example.blog.services.AdService;
-import com.example.blog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdsController {
 
-    AdService adSvc;
+    private final AdService adSvc;
+    private final AdRepository adDao;
 
-    public AdsController(AdService adSvc) {
+    public AdsController(AdService adSvc, AdRepository adDao) {
         this.adSvc = adSvc;
+        this.adDao = adDao;
     }
 
     @GetMapping("/ads")
     public String index(Model model) {
-        model.addAttribute("ads", adSvc.getAllAds());
+        model.addAttribute("ads", adDao.findAll());
         return "/ads/index";
     }
 
     @GetMapping("/ads/{id}")
     public String show(@PathVariable long id, Model model) {
-        model.addAttribute("ad", adSvc.getAd(id));
+        model.addAttribute("ad", adDao.findById(id));
         return "/ads/show";
     }
 
     @GetMapping("/ads/create")
-    @ResponseBody
-    public String create() {
-        return "Here is the ads create form...";
+    public String showCreateForm(Model viewModel) {
+        viewModel.addAttribute("newAd", new Ad());
+        return "/ads/create";
     }
 
     @PostMapping("/ads/create")
-    @ResponseBody
-    public String insert() {
-        return "Inserted new ads!";
+    public String insert(@ModelAttribute Ad newAd) {
+        adDao.save(newAd);
+        return "redirect:/ads";
     }
 
+    @GetMapping("/ads/{id}/edit")
+    public String edit(@PathVariable long id, Model viewModel){
+        viewModel.addAttribute("ad", adSvc.getAd(id));
+        return "/ads/edit";
+    }
+
+    @PostMapping("/ads/edit")
+    public String handleEdit(@ModelAttribute Ad ad){
+        System.out.println("ad = " + ad.getId());
+        System.out.println("ad = " + ad.getDescription());
+        System.out.println("ad = " + ad.getTitle());
+        return "redirect:/ads";
+    }
 }
